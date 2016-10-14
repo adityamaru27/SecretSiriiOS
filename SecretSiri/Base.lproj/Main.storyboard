@@ -133,10 +133,26 @@
                                     <outlet property="delegate" destination="twe-ZC-IBz" id="roQ-Hc-9y8"/>
                                 </connections>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zja-PX-Gzp">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="tLf-Vn-qTU"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <state key="normal" title="Add new contact">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="contactsSearch:" destination="twe-ZC-IBz" eventType="touchUpInside" id="n1S-XO-AXS"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="6Iz-vv-gpr" firstAttribute="top" secondItem="7Uy-XN-r0O" secondAttribute="bottom" id="DHp-yQ-ORB"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="zja-PX-Gzp" secondAttribute="trailing" constant="32" id="1Q0-xx-trd"/>
+                            <constraint firstItem="6Iz-vv-gpr" firstAttribute="top" secondItem="7Uy-XN-r0O" secondAttribute="bottom" constant="61" id="UDl-ZQ-ZvE"/>
+                            <constraint firstItem="zja-PX-Gzp" firstAttribute="leading" secondItem="iEe-WQ-JOc" secondAttribute="leadingMargin" constant="31" id="c5V-AP-vyj"/>
+                            <constraint firstItem="zja-PX-Gzp" firstAttribute="top" secondItem="7Uy-XN-r0O" secondAttribute="bottom" constant="8" id="eOl-RQ-qvg"/>
                             <constraint firstItem="cwb-xj-Ppz" firstAttribute="top" secondItem="6Iz-vv-gpr" secondAttribute="bottom" id="kjY-4N-pif"/>
                             <constraint firstItem="6Iz-vv-gpr" firstAttribute="leading" secondItem="iEe-WQ-JOc" secondAttribute="leading" id="pIE-UF-BPV"/>
                             <constraint firstAttribute="trailing" secondItem="6Iz-vv-gpr" secondAttribute="trailing" id="wQ8-F2-4pF"/>
@@ -148,7 +164,35 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VX7-dK-4jF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1872.8" y="138.98050974512745"/>
+            <point key="canvasLocation" x="1872.5" y="138.5"/>
+        </scene>
+        <!--Contacts Search Table View Controller-->
+        <scene sceneID="NKA-8e-2NV">
+            <objects>
+                <tableViewController id="bK5-Xe-pPp" customClass="ContactsSearchTableViewController" customModule="SecretSiri" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="EIL-UT-yv0">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="contactsCell" id="p2c-N3-FL6">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="p2c-N3-FL6" id="fkY-cc-RLl">
+                                    <frame key="frameInset" width="375" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="bK5-Xe-pPp" id="vJ5-fX-4mS"/>
+                            <outlet property="delegate" destination="bK5-Xe-pPp" id="jSA-rZ-ANI"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="f4x-JH-ofY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2800" y="134"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="hIn-qT-feB">

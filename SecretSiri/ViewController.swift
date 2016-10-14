@@ -43,6 +43,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        AppDelegate.sharedDelegate().checkAccessStatus { (accessGranted) in
+            print(accessGranted)
+        }
         nameLabel.isUserInteractionEnabled = false;
         if let name = userDefaults.string(forKey: userNameKey)
         {

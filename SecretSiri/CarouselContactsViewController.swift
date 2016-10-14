@@ -10,13 +10,21 @@ import UIKit
 
 class CarouselContactsViewController: UIViewController, iCarouselDelegate, iCarouselDataSource {
 
+    @IBAction func contactsSearch(_ sender: AnyObject) {
+        let searchTable = ContactsSearchTableViewController();
+        navigationController?.pushViewController(searchTable, animated: true)
+        print("Turn down for what")
+        
+    }
     @IBOutlet weak var ContactsCarousel: iCarousel!
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        ContactsCarousel.type = iCarouselType.timeMachine;
+        ContactsCarousel.type = iCarouselType.rotary;
         ContactsCarousel.reloadData();
+        
+        title = "Emergency Contacts";
         
     }
 
@@ -31,7 +39,15 @@ class CarouselContactsViewController: UIViewController, iCarouselDelegate, iCaro
     
     func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
         let imageView = UIImageView(frame:CGRect(x: 0, y: 0, width: 250, height: 250));
-        imageView.backgroundColor = UIColor.red;
+        if(index == 0 || index == 2 || index == 4)
+        {
+            imageView.backgroundColor = UIColor.red;
+        }
+        else
+        {
+            imageView.backgroundColor = UIColor.yellow;
+
+        }
         return imageView;
     }
     
