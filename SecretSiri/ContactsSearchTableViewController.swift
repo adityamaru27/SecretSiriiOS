@@ -8,13 +8,25 @@
 
 import UIKit
 import Contacts
+import CoreData
 
 class ContactsSearchTableViewController: UITableViewController, UISearchResultsUpdating, UISearchBarDelegate {
     
+//    weak var delegate:sendBack? = nil;
     var contactStore = CNContactStore();
     var my_contacts:[CNContact] = [];
     var shouldShowSearchResults = false;
     var searchController:UISearchController!;
+    var carouselContactArray: Set<NSManagedObject>!;
+
+    
+    
+    
+    func Setup(arr: Set<NSManagedObject>)->Void
+    {
+        print("Guwop")
+        carouselContactArray = arr;
+    }
     
 
     func findContactsWithName(name: String)
@@ -26,6 +38,10 @@ class ContactsSearchTableViewController: UITableViewController, UISearchResultsU
                     do {
                         let predicate: NSPredicate = CNContact.predicateForContacts(matchingName: name);
                         let keysToFetch = [CNContactGivenNameKey, CNContactPhoneNumbersKey];
+//                        let request = CNContactFetchRequest(keysToFetch: keysToFetch as [CNKeyDescriptor]);
+//                        try self.contactStore.enumerateContacts(with: request, usingBlock: { (contact, stop)->Void in
+//                            self.my_contacts.append(contact);
+//                        })
                         self.my_contacts = try self.contactStore.unifiedContacts(matching: predicate, keysToFetch:keysToFetch as [CNKeyDescriptor]);
                         self.tableView.reloadData();
                     }
@@ -54,6 +70,7 @@ class ContactsSearchTableViewController: UITableViewController, UISearchResultsU
         self.tableView.tableHeaderView = searchController.searchBar;
 
     }
+    
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         shouldShowSearchResults = true;
         self.tableView.reloadData();
@@ -103,13 +120,81 @@ class ContactsSearchTableViewController: UITableViewController, UISearchResultsU
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var my_string = my_contacts[indexPath.row].givenName;
+        var contactsName: String;
+        var numbers: String;
+        if(indexPath.row < my_contacts.count)
+        {
+            contactsName = try my_contacts[indexPath.row].givenName ;
+            if((my_contacts[indexPath.row].phoneNumbers.first) != nil)
+            {
+                numbers = (((my_contacts[indexPath.row].phoneNumbers.first)!.value) as CNPhoneNumber).stringValue;
+            }
+            else
+            {
+                numbers = ""
+            }
+        }
+        else
+        {
+            contactsName = ""
+            numbers = ""
+            print("Index out of range")
+        }
         var cell = ContactsTableViewCell()
-        print(my_string);
+        cell.textLabel!.text = contactsName + " : " + numbers;
+
 //         Configure the cell...
 
         return cell
     }
+    
+    func saveName(name: String)->Void
+    {
+        let appdelegate = UIApplication.shared.delegate as! AppDelegate;
+        let managedObject = appdelegate.persistentContainer.viewContext;
+        
+        
+        let entity = NSEntityDescription.entity(forEntityName: "Contacts", in: managedObject);
+        let contacts = NSManagedObject(entity: entity!, insertInto: managedObject);
+        
+        var detailArr = name.components(separatedBy: " : ")
+        
+        contacts.setValue(detailArr[0], forKey: "name");
+        contacts.setValue(detailArr[1], forKey: "number")
+        
+        do
+        {
+            try managedObject.save();
+            carouselContactArray.insert(contacts);
+        }
+        catch let error as NSError
+        {
+            print("error here")
+        }
+
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if(carouselContactArray.count < 5)
+        {
+    
+            saveName(name: (self.tableView.cellForRow(at: indexPath)!.textLabel!.text)!);
+            let alert = UIAlertController(title: "Success", message: "Contact added", preferredStyle: UIAlertControllerStyle.alert);
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil);
+            
+        }
+        else
+        {
+            let alert = UIAlertController(title: "Alert", message: "5 contacts already registered, delete before adding more!", preferredStyle: UIAlertControllerStyle.alert);
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil);
+        }
+    }
+    
+//    override func viewWillDisappear(_ animated: Bool) {
+//        delegate?.sendBack(set: carouselContactArray);
+//    }
 
     /*
     // Override to support conditional editing of the table view.
@@ -157,3 +242,7 @@ class ContactsSearchTableViewController: UITableViewController, UISearchResultsU
     */
 
 }
+
+//protocol sendBack:class {
+//    func sendBack(set: Set<NSManagedObject>!) -> Void;
+//}

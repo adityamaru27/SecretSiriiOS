@@ -134,9 +134,9 @@
                                 </connections>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zja-PX-Gzp">
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.98431372549999996" green="0.23921568630000001" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="tLf-Vn-qTU"/>
+                                    <constraint firstAttribute="height" constant="40" id="lwh-LA-iuy"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" title="Add new contact">
@@ -146,16 +146,29 @@
                                     <action selector="contactsSearch:" destination="twe-ZC-IBz" eventType="touchUpInside" id="n1S-XO-AXS"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3bI-lR-bMo">
+                                <color key="backgroundColor" red="1" green="0.33313184039999999" blue="0.3687701357" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="c6J-qt-ydK"/>
+                                </constraints>
+                                <state key="normal" title="Delete contact"/>
+                                <connections>
+                                    <action selector="deleteButton:" destination="twe-ZC-IBz" eventType="touchUpInside" id="fkq-3r-hnZ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="zja-PX-Gzp" secondAttribute="trailing" constant="32" id="1Q0-xx-trd"/>
-                            <constraint firstItem="6Iz-vv-gpr" firstAttribute="top" secondItem="7Uy-XN-r0O" secondAttribute="bottom" constant="61" id="UDl-ZQ-ZvE"/>
-                            <constraint firstItem="zja-PX-Gzp" firstAttribute="leading" secondItem="iEe-WQ-JOc" secondAttribute="leadingMargin" constant="31" id="c5V-AP-vyj"/>
-                            <constraint firstItem="zja-PX-Gzp" firstAttribute="top" secondItem="7Uy-XN-r0O" secondAttribute="bottom" constant="8" id="eOl-RQ-qvg"/>
-                            <constraint firstItem="cwb-xj-Ppz" firstAttribute="top" secondItem="6Iz-vv-gpr" secondAttribute="bottom" id="kjY-4N-pif"/>
-                            <constraint firstItem="6Iz-vv-gpr" firstAttribute="leading" secondItem="iEe-WQ-JOc" secondAttribute="leading" id="pIE-UF-BPV"/>
-                            <constraint firstAttribute="trailing" secondItem="6Iz-vv-gpr" secondAttribute="trailing" id="wQ8-F2-4pF"/>
+                            <constraint firstAttribute="trailing" secondItem="6Iz-vv-gpr" secondAttribute="trailing" id="3SQ-id-U68"/>
+                            <constraint firstItem="cwb-xj-Ppz" firstAttribute="top" secondItem="3bI-lR-bMo" secondAttribute="bottom" id="4La-JF-Aal"/>
+                            <constraint firstItem="zja-PX-Gzp" firstAttribute="leading" secondItem="iEe-WQ-JOc" secondAttribute="leading" id="ANR-ou-rO1"/>
+                            <constraint firstAttribute="trailing" secondItem="3bI-lR-bMo" secondAttribute="trailing" id="Jrj-d3-6CO"/>
+                            <constraint firstItem="3bI-lR-bMo" firstAttribute="leading" secondItem="iEe-WQ-JOc" secondAttribute="leading" id="NXo-uJ-7BO"/>
+                            <constraint firstAttribute="trailing" secondItem="zja-PX-Gzp" secondAttribute="trailing" id="fly-cV-9Be"/>
+                            <constraint firstItem="6Iz-vv-gpr" firstAttribute="top" secondItem="zja-PX-Gzp" secondAttribute="bottom" id="gxp-eT-jgx"/>
+                            <constraint firstItem="zja-PX-Gzp" firstAttribute="top" secondItem="7Uy-XN-r0O" secondAttribute="bottom" id="nhm-xL-GUp"/>
+                            <constraint firstItem="6Iz-vv-gpr" firstAttribute="leading" secondItem="iEe-WQ-JOc" secondAttribute="leading" id="sUN-Pr-KYO"/>
+                            <constraint firstItem="3bI-lR-bMo" firstAttribute="top" secondItem="6Iz-vv-gpr" secondAttribute="bottom" id="zKj-4U-y5h"/>
                         </constraints>
                     </view>
                     <connections>
@@ -164,7 +177,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VX7-dK-4jF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1872.5" y="138.5"/>
+            <point key="canvasLocation" x="1871.2" y="138.0809595202399"/>
         </scene>
         <!--Contacts Search Table View Controller-->
         <scene sceneID="NKA-8e-2NV">
@@ -179,7 +192,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="p2c-N3-FL6" id="fkY-cc-RLl">
-                                    <frame key="frameInset" width="375" height="43"/>
+                                    <frame key="frameInset" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>

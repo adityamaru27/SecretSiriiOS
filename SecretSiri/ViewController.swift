@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import MessageUI
+import CoreData
 
-class ViewController: UIViewController, UITextFieldDelegate {
+class ViewController: UIViewController, UITextFieldDelegate, MFMessageComposeViewControllerDelegate {
+    var messageRecipients = Set<NSManagedObject>();
     
     @IBAction func contactButton(_ sender: AnyObject) {
     }
@@ -58,6 +61,38 @@ class ViewController: UIViewController, UITextFieldDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
+        print("sent")
+    }
+    
+    func sendMessage()
+    {
+        var messageVC = MFMessageComposeViewController()
+        messageVC.body = "SOS"
+        
+        let delegate = UIApplication.shared.delegate as? AppDelegate;
+        
+        let context = delegate?.persistentContainer.viewContext;
+        
+        let fetchRequest:NSFetchRequest<NSManagedObject> = NSFetchRequest(entityName: "Contacts")
+        
+        do
+        {
+            let results = try context?.fetch(fetchRequest);
+            for i in results!
+            {
+               messageRecipients.insert(i);
+               messageVC.recipients?.append((i.value(forKey: "number") as? String)!)
+                
+                
+            }
+        }
+        catch let error as NSError
+        {
+            print("Fetching error")
+        }
     }
     
     

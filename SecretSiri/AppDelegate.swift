@@ -9,10 +9,12 @@
 import UIKit
 import CoreData
 import Contacts
+import MessageUI
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    public var colorArray: Array<UIColor>!;
     var window: UIWindow?
     var store:CNContactStore = CNContactStore();
     
@@ -39,6 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
     }
     
+    
     class func sharedDelegate() -> AppDelegate
     {
         return UIApplication.shared.delegate as! AppDelegate
@@ -46,6 +49,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        self.colorArray = Array<UIColor>()
+        colorArray.append(UIColor.red);
+        colorArray.append(UIColor.blue);
+        colorArray.append(UIColor.green)
+        colorArray.append(UIColor.yellow);
+        colorArray.append(UIColor.brown);
+        print(colorArray.count)
         return true
     }
 
